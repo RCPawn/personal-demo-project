@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设备借还</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://img-baofun.zhhainiao.com/pcwallpaper_ugc/static/7be1fb0e5886c33326fab9232d5ed0d0.jpg?x-oss-process=image%2fresize%2cm_lfit%2cw_2560%2ch_1440');
+            background-size: cover;
+            background-position: center;
+            color: #fff; /* 背景图上的文字颜色 */
+            display: flex;
+            height: 100vh;
+        }
+        tr {
+            color: white;
+        }
+        .top-right {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .btn-primary {
+            background-color: blue;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 30px 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #e74c3c;
+            transform: translateY(-5px);
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            text-indent: -100px;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .borrow-button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .scrap-button{
+            background-color: red;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>设备借还</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>设备名称</th>
+            <th>借取人</th>
+            <th>借出日期</th>
+            <th>归还日期</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="borrow : ${borrows}">
+            <td th:text="${borrow.id}"></td>
+            <td th:text="${borrow.machineName}"></td>
+            <td th:text="${borrow.username}"></td>
+            <td th:text="${borrow.createTime}"></td>
+            <td th:text="${borrow.updateTime}"></td>
+
+            <td>
+                <button type="submit" class="btn borrow-button">借取</button>
+                <button class="btn scrap-button">归还</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/" class="btn btn-primary top-right">返回主页</a>
+</div>
+
+</body>
+</html>

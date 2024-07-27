@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rcpawn.mapper.MachineMapper">
+
+    <insert id="addMachine">
+        insert into machine(machine_name, type, amount, factory, link)
+        values (#{machineName},#{type},#{amount},#{factory},#{link})
+    </insert>
+
+    <update id="update">
+        update machine
+        <set>
+            <if test="id != null and id != ''">
+                id = #{id},
+            </if>
+            <if test="machineName != null and machineName != ''">
+                machine_name = #{machineName},
+            </if>
+            <if test="type != null and type != ''">
+                type = #{type},
+            </if>
+            <if test="amount != null and amount != ''">
+                amount = #{amount},
+            </if>
+            <if test="location != null and location != ''">
+                location = #{location},
+            </if>
+            <if test="factory != null and factory != ''">
+                factory = #{factory},
+            </if>
+        </set>
+        where machine_name = #{machineName}
+    </update>
+
+    <select id="queryByName" resultType="com.rcpawn.pojo.Machine">
+        select machine_name, type, amount, factory, link, update_time from machine
+        where machine_name = #{machineName}
+    </select>
+
+</mapper>

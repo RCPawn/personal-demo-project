@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加设备</title>
+    <style>
+        /* 重置浏览器默认样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif; /* 选择字体 */
+            background-color: #f4f4f4; /* 背景颜色 */
+            color: #333; /* 文字颜色 */
+            line-height: 1.6; /* 行高 */
+        }
+
+        .container {
+            max-width: 600px; /* 最大宽度 */
+            margin: 50px auto; /* 上下外边距和水平居中 */
+            padding: 20px; /* 内边距 */
+            background: #fff; /* 容器背景色 */
+            border-radius: 8px; /* 圆角 */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 阴影效果 */
+        }
+
+        h2, h4 {
+            text-align: center; /* 文本居中 */
+            margin-bottom: 20px; /* 下边距 */
+        }
+
+        h4.error {
+            color: #e74c3c; /* 错误信息颜色 */
+        }
+
+        .form-group {
+            margin-bottom: 15px; /* 表单组之间的间距 */
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd; /* 边框颜色 */
+            border-radius: 4px; /* 输入框圆角 */
+        }
+
+        .btn-primary {
+            background-color: #3498db; /* 按钮背景色 */
+            color: white; /* 按钮文字颜色 */
+            border: none; /* 无边框 */
+            padding: 10px 15px;
+            border-radius: 5px; /* 按钮圆角 */
+            cursor: pointer; /* 鼠标悬停效果 */
+            transition: background-color 0.3s; /* 背景色渐变效果 */
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9; /* 鼠标悬停时的背景色 */
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                margin: 20px auto;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <h2>添加新设备</h2>
+    <h4 th:text="${error}" class="error"></h4>
+    <form action="/machine/add" method="post" enctype="multipart/form-data" id="addMachineForm">
+        <div class="form-group">
+            <label for="machineName">设备名称</label>
+            <input type="text" class="form-control" id="machineName" name="machineName" required>
+        </div>
+        <div class="form-group">
+            <label for="type">类型</label>
+            <input type="text" class="form-control" id="type" name="type" required>
+        </div>
+        <div class="form-group">
+            <label for="amount">现有数量</label>
+            <input type="text" class="form-control" id="amount" name="amount" required>
+        </div>
+        <div class="form-group">
+            <label for="factory">生产厂家</label>
+            <input type="text" class="form-control" id="factory" name="factory" required>
+        </div>
+        <div class="form-group">
+            <label for="link">参考链接</label>
+            <input type="file" class="form-control" id="link" name="image" onchange="updateFileName()">
+            <!-- 添加一个隐藏字段用于保存文件名 -->
+            <input type="hidden" id="fileName" name="fileName">
+        </div>
+        <button type="submit" class="btn btn-primary">提交</button>
+    </form>
+
+    <script>
+        function updateFileName() {
+            var fileInput = document.getElementById('link');
+            var fileNameInput = document.getElementById('fileName');
+            fileNameInput.value = fileInput.files[0].name;
+        }
+    </script>
+
+</div>
+</body>
+
+</html>
+

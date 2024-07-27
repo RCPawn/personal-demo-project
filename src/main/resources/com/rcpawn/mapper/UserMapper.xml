@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rcpawn.mapper.UserMapper">
+
+    <insert id="add" parameterType="com.rcpawn.pojo.User">
+        insert into user(username, password) values (#{username},#{password})
+    </insert>
+
+    <select id="queryByNameAndPassword" resultType="com.rcpawn.pojo.User">
+        select * from user where username = #{username} and password = #{password}
+    </select>
+
+    <update id="update">
+        update user
+        <set>
+            <if test="id != null and id != ''">
+                id = #{id},
+            </if>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="gender != null and gender != ''">
+                gender = #{gender},
+            </if>
+            <if test="type != null and type != ''">
+                type = #{type},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+        </set>
+        where username = #{username}
+    </update>
+
+</mapper>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>报修报废</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://img-baofun.zhhainiao.com/pcwallpaper_ugc/static/7be1fb0e5886c33326fab9232d5ed0d0.jpg?x-oss-process=image%2fresize%2cm_lfit%2cw_2560%2ch_1440');
+            background-size: cover;
+            background-position: center;
+            color: #fff; /* 背景图上的文字颜色 */
+            display: flex;
+            height: 100vh;
+        }
+
+        tr {
+            color: white;
+        }
+
+        .top-right {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .btn-primary {
+            background-color: blue;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 30px 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #e74c3c;
+            transform: translateY(-5px);
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            text-indent: -100px;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .repair-button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .scrap-button {
+            background-color: red;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .pos {
+            position: absolute;
+            top: 60px;
+            right: 10px;
+        }
+
+        .btn-scrap {
+            background-color: red;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 30px 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .btn-scrap:hover {
+            background-color: blue;
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>报修报废</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>设备名</th>
+            <th>报修人</th>
+            <th>维修人</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="repair : ${repairs}">
+            <td th:text="${repair.id}"></td>
+            <td th:text="${repair.deviceName}"></td>
+            <td th:text="${repair.reporterName}"></td>
+            <td th:text="${repair.repairerName}"></td>
+            <td th:text="${repair.status}"></td>
+
+            <td>
+                <!-- <form action="/machine/repairMachine" method="get">-->
+                <!-- <input type="hidden" name="id" th:value="${machine.id}">-->
+                <button type="submit" class="btn repair-button">报修</button>
+                <!--                </form>-->
+
+                <a th:href="@{/machine/scrapped/{deviceName}(deviceName=${repair.deviceName})}"
+                   onclick="return confirm('确定要报废吗？');"
+                   class="btn scrap-button">报废</a>
+            </td>
+        </tr>
+        <form action="/machine/clear" method="get">
+            <button type="submit" class="btn btn-scrap pos"
+                    onclick="return confirm('确定清空报废表吗？');">
+                清空报废
+            </button>
+        </form>
+        </tbody>
+    </table>
+    <a href="/" class="btn btn-primary top-right">返回主页</a>
+
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>

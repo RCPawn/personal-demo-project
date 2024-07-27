@@ -1,0 +1,66 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传文件</title>
+</head>
+<body>
+
+    <form action="/uploadTest" method="post" enctype="multipart/form-data">
+        姓名: <input type="text" name="username"><br>
+        年龄: <input type="text" name="age"><br>
+        头像: <input type="file" name="image"><br>
+        <input type="submit" value="提交">
+    </form>
+
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片上传测试</title>
+</head>
+<body>
+<h1>图片上传测试</h1>
+<input type="file" id="fileInput" />
+<button onclick="uploadImage()">上传</button>
+<div id="imageContainer"></div>
+
+<script>
+    function uploadImage() {
+        var fileInput = document.getElementById('fileInput');
+        var file = fileInput.files[0];
+        var formData = new FormData();
+        formData.append('file', file);
+
+        fetch('/upload', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.text())
+            .then(result => {
+                console.log(result);
+                if (result === '上传成功') {
+                    displayImage(file);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function displayImage(file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var imageContainer = document.getElementById('imageContainer');
+            var img = document.createElement('img');
+            img.src = e.target.result;
+            img.style.maxWidth = '300px'; // 设置图片最大宽度
+            imageContainer.appendChild(img);
+        }
+        reader.readAsDataURL(file);
+    }
+</script>
+</body>
+</html>

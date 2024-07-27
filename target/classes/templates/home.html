@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设备管家</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://img.zcool.cn/community/010a775c29092aa80121df90aa65b6.png@1280w_1l_2o_100sh.png');
+            background-size: cover;
+            background-position: center;
+            color: #fff; /* 背景图上的文字颜色 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative; /* 为退出按钮定位做准备 */
+        }
+
+        .system-name {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            font-weight: bold;
+            text-transform: uppercase;
+            z-index: 1;
+            display: flex; /* 用于在标题中水平排列图标和文字 */
+            align-items: center; /* 垂直居中对齐图标和文字 */
+        }
+
+        .system-name .icon {
+            margin-right: 10px; /* 图标和文字之间的间距 */
+            font-size: 40px; /* 确保图标大小与文字大小一致 */
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 21, 43, 0.7); /* 背景图透明度调整 */
+            z-index: -1;
+        }
+
+        .system-name {
+            position: absolute;
+            top: 30px; /* 根据需要调整 */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px; /* 增大字体大小 */
+            font-weight: bold;
+            text-transform: uppercase;
+            z-index: 1;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px; /* 根据需要调整 */
+        }
+
+        .navbar a {
+            margin: 0 25px; /* 保持一致的间隙 */
+            padding: 15px 30px; /* 保持一致的内边距 */
+            font-size: 20px; /* 保持一致的字体大小 */
+            border-radius: 20px; /* 保持一致的圆角 */
+            text-decoration: none;
+            color: #fff; /* 保持一致的文字颜色 */
+            background-color: rgba(255, 255, 255, 0.2); /* 半透明背景 */
+            transition: transform 0.3s ease, background-color 0.3s ease; /* 统一动画效果 */
+        }
+
+        .navbar a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .navbar .logout {
+            padding: 10px 15px;
+            font-size: 14px;
+            border-radius: 10px;
+            background-color: #ff4d4d;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .navbar .logout:hover {
+            background-color: #cc3333;
+            transform: translateY(-5px);
+        }
+
+        .navbar a {
+            display: flex;
+            align-items: center; /* 确保图标和文本垂直居中对齐 */
+            gap: 10px; /* 图标和文本之间的间距 */
+        }
+
+        .logout {
+            position: absolute;
+            top: 70px;
+            right: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="system-name"><i class="fas fa-laptop-code icon"></i> 油橄榄基地设备管家</h1>
+
+    <div class="navbar">
+        <a href="/screen">
+            <i class="fas fa-chart-line"></i> 数据大屏</a>
+        <a href="/machine/borrowReturn">
+            <i class="fas fa-exchange-alt"></i> 设备借还</a>
+        <a href="/machine/repair">
+            <i class="fas fa-wrench"></i> 报修报废</a>
+        <a href="/machine/machineList">
+            <i class="fas fa-laptop"></i> 设备管理</a>
+        <a href="/users/userList">
+            <i class="fas fa-users"></i> 用户管理</a>
+        <div class="nav-bar-right">
+            <a href="/users" class="logout">
+                <i class="fas fa-sign-out-alt"></i> 退出登录</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
